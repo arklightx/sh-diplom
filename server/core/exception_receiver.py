@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework.views import exception_handler
 from django.conf import settings
 
-from src.core.exception import ClientException, ServerException
+from core.exception import ClientException, ServerException
 import logging
 
 logging.basicConfig(filename=settings.BASE_DIR / "logs.log", level=logging.WARNING, format="[%(asctime)s] [%(levelname)s]: %(message)s")

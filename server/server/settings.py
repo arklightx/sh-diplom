@@ -13,14 +13,16 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+from dotenv import load_dotenv
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4)kb1f=-vk1m@y8h5^$n*hf8@u%3-5=ai^1ydoeg)=uoj4+(uu'
+SECRET_KEY = os.environ.get("DJANGO_SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     "rest_framework",
+    "modules.user"
 ]
 
 MIDDLEWARE = [
@@ -58,12 +61,12 @@ JWT_ACCESS_LIFETIME = timedelta(minutes=10)
 JWT_REFRESH_LIFETIME = timedelta(days=7)
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'src.core.utils.searching.paginator.Paginator',
+    'DEFAULT_PAGINATION_CLASS': 'core.utils.searching.paginator.Paginator',
     'DEFAULT_METADATA_CLASS': 'rest_framework.metadata.SimpleMetadata',
     'SEARCH_PARAM': 'q',
     'ORDERING_PARAM': 'ordered_by',
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        "src.modules.user.identification.auth.AuthenticationSystem",
+        "modules.user.auth.AuthenticationSystem",
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
@@ -73,7 +76,7 @@ REST_FRAMEWORK = {
         'rest_framework.filters.OrderingFilter',
         'rest_framework.filters.SearchFilter'
     ],
-    'EXCEPTION_HANDLER': 'src.core.exception_receiver.err_handler'
+    'EXCEPTION_HANDLER': 'core.exception_receiver.err_handler'
 }
 
 ROOT_URLCONF = 'server.urls'
@@ -112,6 +115,7 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = "user.User"
 
 AUTH_PASSWORD_VALIDATORS = [
 

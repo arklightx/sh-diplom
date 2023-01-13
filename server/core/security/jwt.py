@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from datetime import datetime
-from src.modules.user.identification.models import AccessTokens, RefreshTokens
+from modules.user.models import AccessTokens, RefreshTokens
 import jwt
 import json
 

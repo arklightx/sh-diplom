@@ -11,39 +11,7 @@ from core.utils.esia import get_refresh_dict
 
 from .auth import AuthenticationSystem
 from .models import User, AccessTokens, RefreshTokens
-from .serializers import AuthorizationSerializer, RegistrationSerializer, AuthRespSerializer, \
-    ConfirmRegistrationSerializer, ConfirmPasswordChangeSerializer, PasswordChangeSerializer
-
-
-class Registration(CreateAPIView):
-    permission_classes = [permissions.AllowAny]
-    serializer_class = RegistrationSerializer
-    authentication_classes = []
-
-    def post(self, request: Request, *args, **kwargs):
-        data = self.serializer_class(data=request.data)
-        if not data.is_valid():
-            raise ClientException(data.errors)
-        data.save()
-        return Response(status=status.HTTP_201_CREATED)
-
-
-class ConfirmEmail(CreateAPIView):
-    permission_classes = [permissions.AllowAny]
-    serializer_class = ConfirmRegistrationSerializer
-    authentication_classes = []
-
-    def post(self, request: Request, *args, **kwargs):
-        token = request.data.get("token")
-        candidates = User.objects.filter(token_email=token)
-        if len(candidates) == 1:
-            user = candidates[0]
-            serializer = self.serializer_class(user, data=request.data, partial=True)
-            if not serializer.is_valid():
-                raise ServerException()
-            serializer.save()
-            return Response(status=204)
-        raise ClientException("Ошибка подтверждения почты", status.HTTP_400_BAD_REQUEST)
+from .serializers import AuthorizationSerializer, AuthRespSerializer, ConfirmPasswordChangeSerializer, PasswordChangeSerializer
 
 
 class Authorization(CreateAPIView):

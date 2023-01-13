@@ -1,9 +1,9 @@
 from rest_framework.authentication import BaseAuthentication
 from rest_framework.request import Request
 
-from src.core.exception import ClientException
-from src.core.security import jwt
-from src.core.security.jwt import AccessToken
+from core.exception import ClientException
+from core.security import jwt
+from core.security.jwt import AccessToken
 
 from .models import User, AccessTokens
 
