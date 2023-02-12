@@ -41,7 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     "rest_framework",
-    "modules.user"
+    "modules.user",
+    "modules.home",
+    "modules.documents",
+    "modules.questions",
+    "modules.reqs_to_company",
+    "modules.votes",
+    "modules.events"
 ]
 
 MIDDLEWARE = [
@@ -61,7 +67,6 @@ JWT_ACCESS_LIFETIME = timedelta(minutes=10)
 JWT_REFRESH_LIFETIME = timedelta(days=7)
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'core.utils.searching.paginator.Paginator',
     'DEFAULT_METADATA_CLASS': 'rest_framework.metadata.SimpleMetadata',
     'SEARCH_PARAM': 'q',
     'ORDERING_PARAM': 'ordered_by',

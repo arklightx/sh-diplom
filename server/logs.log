@@ -1,0 +1,281 @@
+[2023-01-13 21:32:44,080] [CRITICAL]: 'QuerySet' object has no attribute 'home_level_list'
+[2023-01-13 21:32:44,215] [ERROR]: Internal Server Error: /api/v1/homes/1/
+Traceback (most recent call last):
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\arkli\Desktop\clounada\sh-diplom\server\modules\home\views.py", line 17, in retrieve
+    a = home.home_level_list.all()
+AttributeError: 'QuerySet' object has no attribute 'home_level_list'
+[2023-01-13 21:38:23,116] [CRITICAL]: 'HomeLevel' object has no attribute 'homelevel_set'
+[2023-01-13 21:38:23,164] [ERROR]: Internal Server Error: /api/v1/homes/1/
+Traceback (most recent call last):
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\mixins.py", line 56, in retrieve
+    return Response(serializer.data)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 555, in data
+    ret = super().data
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\relations.py", line 565, in to_representation
+    return [
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\relations.py", line 566, in <listcomp>
+    self.child_relation.to_representation(value)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\relations.py", line 469, in to_representation
+    return getattr(obj, self.slug_field)
+AttributeError: 'HomeLevel' object has no attribute 'homelevel_set'
+[2023-01-13 21:38:42,109] [INFO]: C:\Users\arkli\Desktop\clounada\sh-diplom\server\modules\home\serializers.py changed, reloading.
+[2023-01-13 22:05:25,977] [CRITICAL]: The field 'avatar' was declared on serializer UserSerializer, but has not been included in the 'fields' option.
+[2023-01-13 22:05:26,020] [ERROR]: Internal Server Error: /api/v1/homes/1/
+Traceback (most recent call last):
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\mixins.py", line 56, in retrieve
+    return Response(serializer.data)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 555, in data
+    ret = super().data
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 507, in to_representation
+    for field in fields:
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 368, in _readable_fields
+    for field in self.fields.values():
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 356, in fields
+    for key, value in self.get_fields().items():
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 1052, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 1148, in get_field_names
+    assert field_name in fields, (
+AssertionError: The field 'avatar' was declared on serializer UserSerializer, but has not been included in the 'fields' option.
+[2023-01-13 22:05:46,703] [INFO]: C:\Users\arkli\Desktop\clounada\sh-diplom\server\modules\home\serializers.py changed, reloading.
+[2023-02-12 15:54:14,265] [CRITICAL]: Учетные данные не были предоставлены.
+[2023-02-12 15:54:14,266] [WARNING]: Forbidden: /api/v1/requests/
+[2023-02-12 15:55:40,676] [WARNING]: Bad Request: /api/auth/authorize/
+[2023-02-12 15:56:19,422] [WARNING]: Bad Request: /api/auth/authorize/
+[2023-02-12 16:00:05,017] [INFO]: C:\Users\arkli\Desktop\clounada\sh-diplom\server\modules\home\admin.py changed, reloading.
+[2023-02-12 16:01:59,414] [CRITICAL]: {'home': [ErrorDetail(string='Недопустимый первичный ключ "4" - объект не существует.', code='does_not_exist')]}
+[2023-02-12 16:01:59,415] [WARNING]: Bad Request: /api/v1/requests/
+[2023-02-12 16:02:13,502] [CRITICAL]: 'home_id'
+[2023-02-12 16:02:13,635] [ERROR]: Internal Server Error: /api/v1/requests/
+Traceback (most recent call last):
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\mixins.py", line 19, in create
+    self.perform_create(serializer)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\mixins.py", line 24, in perform_create
+    serializer.save()
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "C:\Users\arkli\Desktop\clounada\sh-diplom\server\modules\reqs_to_company\serializers.py", line 12, in create
+    home_id=validated_data["home_id"],
+KeyError: 'home_id'
+[2023-02-12 16:02:23,176] [CRITICAL]: {'home': [ErrorDetail(string='Обязательное поле.', code='required')], 'user': [ErrorDetail(string='Обязательное поле.', code='required')]}
+[2023-02-12 16:02:23,176] [WARNING]: Bad Request: /api/v1/requests/
+[2023-02-12 16:02:31,282] [CRITICAL]: 'home_id'
+[2023-02-12 16:02:31,369] [ERROR]: Internal Server Error: /api/v1/requests/
+Traceback (most recent call last):
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\mixins.py", line 19, in create
+    self.perform_create(serializer)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\mixins.py", line 24, in perform_create
+    serializer.save()
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "C:\Users\arkli\Desktop\clounada\sh-diplom\server\modules\reqs_to_company\serializers.py", line 12, in create
+    home_id=validated_data["home_id"],
+KeyError: 'home_id'
+[2023-02-12 16:02:37,147] [INFO]: C:\Users\arkli\Desktop\clounada\sh-diplom\server\modules\reqs_to_company\serializers.py changed, reloading.
+[2023-02-12 16:02:41,378] [CRITICAL]: Field 'id' expected a number but got <Home: sdfsdf 1>.
+[2023-02-12 16:02:41,558] [ERROR]: Internal Server Error: /api/v1/requests/
+Traceback (most recent call last):
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\fields\__init__.py", line 2018, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'Home'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\mixins.py", line 19, in create
+    self.perform_create(serializer)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\mixins.py", line 24, in perform_create
+    serializer.save()
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "C:\Users\arkli\Desktop\clounada\sh-diplom\server\modules\reqs_to_company\serializers.py", line 9, in create
+    Requests.objects.create(
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 671, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\base.py", line 812, in save
+    self.save_base(
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\base.py", line 863, in save_base
+    updated = self._save_table(
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\base.py", line 1006, in _save_table
+    results = self._do_insert(
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\base.py", line 1047, in _do_insert
+    return manager._insert(
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 1791, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\sql\compiler.py", line 1659, in execute_sql
+    for sql, params in self.as_sql():
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\sql\compiler.py", line 1583, in as_sql
+    value_rows = [
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\sql\compiler.py", line 1584, in <listcomp>
+    [
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\sql\compiler.py", line 1585, in <listcomp>
+    self.prepare_value(field, self.pre_save_val(field, obj))
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\sql\compiler.py", line 1523, in prepare_value
+    value = field.get_db_prep_save(value, connection=self.connection)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\fields\related.py", line 1146, in get_db_prep_save
+    return self.target_field.get_db_prep_save(value, connection=connection)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\fields\__init__.py", line 925, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\fields\__init__.py", line 2703, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\fields\__init__.py", line 2020, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <Home: sdfsdf 1>.
+[2023-02-12 16:02:54,030] [INFO]: C:\Users\arkli\Desktop\clounada\sh-diplom\server\modules\reqs_to_company\serializers.py changed, reloading.
+[2023-02-12 16:09:13,258] [CRITICAL]: Учетные данные не были предоставлены.
+[2023-02-12 16:09:13,259] [WARNING]: Forbidden: /api/v1/requests/1/
+[2023-02-12 16:09:14,545] [CRITICAL]: Учетные данные не были предоставлены.
+[2023-02-12 16:09:14,546] [WARNING]: Forbidden: /api/v1/requests/1/
+[2023-02-12 16:30:59,409] [CRITICAL]: Учетные данные не были предоставлены.
+[2023-02-12 16:30:59,410] [WARNING]: Forbidden: /api/v1/votes/
+[2023-02-12 16:31:35,856] [INFO]: C:\Users\arkli\Desktop\clounada\sh-diplom\server\modules\votes\serializers.py changed, reloading.
+[2023-02-12 16:42:12,102] [CRITICAL]: Учетные данные не были предоставлены.
+[2023-02-12 16:42:12,103] [WARNING]: Forbidden: /api/v1/votes/
+[2023-02-12 16:42:37,851] [ERROR]: Internal Server Error: /api/v1/votes/
+Traceback (most recent call last):
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 511, in dispatch
+    self.response = self.finalize_response(request, response, *args, **kwargs)
+  File "C:\Users\arkli\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 423, in finalize_response
+    assert isinstance(response, HttpResponseBase), (
+AssertionError: Expected a `Response`, `HttpResponse` or `HttpStreamingResponse` to be returned from the view, but received a `<class 'rest_framework.utils.serializer_helpers.ReturnDict'>`
+[2023-02-12 16:42:55,344] [INFO]: C:\Users\arkli\Desktop\clounada\sh-diplom\server\modules\votes\views.py changed, reloading.
+[2023-02-12 16:43:17,622] [CRITICAL]: Учетные данные не были предоставлены.
+[2023-02-12 16:43:17,623] [WARNING]: Forbidden: /api/v1/votes/
+[2023-02-12 16:43:22,180] [CRITICAL]: Метод "GET" не разрешен.
+[2023-02-12 16:43:22,180] [WARNING]: Method Not Allowed: /api/v1/votes/
+[2023-02-12 16:43:42,529] [INFO]: C:\Users\arkli\Desktop\clounada\sh-diplom\server\modules\votes\urls.py changed, reloading.
+[2023-02-12 16:52:58,147] [CRITICAL]: Учетные данные не были предоставлены.
+[2023-02-12 16:52:58,148] [WARNING]: Forbidden: /api/v1/votes/2/
+[2023-02-12 16:54:07,331] [INFO]: C:\Users\arkli\Desktop\clounada\sh-diplom\server\modules\votes\views.py changed, reloading.
+[2023-02-12 17:11:43,438] [CRITICAL]: Учетные данные не были предоставлены.
+[2023-02-12 17:11:43,438] [WARNING]: Forbidden: /api/v1/votes/1/

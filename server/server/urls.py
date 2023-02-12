@@ -5,7 +5,12 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('modules.user.urls'))
+    path('api/', include('modules.user.urls')),
+    path("api/v1/", include("modules.home.urls")),
+    path("api/v1/", include("modules.questions.urls")),
+    path("api/v1/", include("modules.reqs_to_company.urls")),
+    path("api/v1/", include("modules.votes.urls")),
+    path("api/v1/", include("modules.events.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

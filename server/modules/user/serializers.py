@@ -18,7 +18,6 @@ class GroupSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     groups = GroupSerializer(many=True, read_only=True)
-    avatar = serializers.SerializerMethodField("image_field")
 
     class Meta:
         model = User
