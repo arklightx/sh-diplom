@@ -33,3 +33,12 @@ class Apartment(models.Model):
         return f"{self.level.home.street} {self.level.home.home_number}, этаж {self.level.level}, квартира {self.apartment_number}"
 
 
+class Staff(models.Model):
+    first_name = models.CharField(max_length=70)
+    last_name = models.CharField(max_length=70)
+    middle_name = models.CharField(max_length=70)
+    role = models.CharField(max_length=50)
+    home = models.ForeignKey(Home, on_delete=models.CASCADE, related_name="staffs")
+
+    def __str__(self) -> str:
+        return f"{self.id}. Дом - {self.home.id}"

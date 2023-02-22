@@ -5,6 +5,8 @@ from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from .models import Votes, VotesVariants
 from .serializers import VotesSerializer, VotesVariantsSerializer, CreateVoteSerializer
 import json
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.request import Request
 
 
 class CreateVoteView(CreateAPIView):
@@ -46,3 +48,16 @@ class VotesVariantsViews(ModelViewSet):
     queryset = VotesVariants.objects.all()
     serializer_class = VotesVariantsSerializer
     permission_classes = [IsAuthenticated]
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def vote_by_user(request: Request):
+    user_choice_vote = VotesVariants.objects.get(id=request.data.get("id"))
+    variants = user_choice_vote.for_vote.variants.all()
+    for variant in variants:
+        users = variant.user.all()
+        if request.user in users:
+            variant.user.remove(request.user)
+    user_choice_vote.user.add(request.user)
+    return Response(status=201)

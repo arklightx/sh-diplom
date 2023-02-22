@@ -12,8 +12,14 @@ class Votes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     isActive = models.BooleanField(default=False, blank=True)
 
+    def __str__(self) -> str:
+        return f"{self.id}. Дом: {self.home.id}. Тема: {self.theme}"
+
 
 class VotesVariants(models.Model):
     label = models.CharField(max_length=128)
     user = models.ManyToManyField(User, blank=True)
     for_vote = models.ForeignKey(Votes, on_delete=models.CASCADE, related_name="variants")
+
+    def __str__(self) -> str:
+        return self.label

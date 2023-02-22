@@ -9,5 +9,5 @@ class Events(models.Model):
     end = models.DateTimeField()
     timed = models.BooleanField(blank=True)
     description = models.TextField()
-    home = models.ForeignKey(Home, on_delete=models.CASCADE, null=True, default=None)
+    home = models.ForeignKey(Home, on_delete=models.CASCADE, null=True, default=None, related_name="events")
 

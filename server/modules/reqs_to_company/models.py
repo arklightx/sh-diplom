@@ -13,7 +13,7 @@ class Requests(models.Model):
     text = models.TextField()
     done_dt = models.DateTimeField(null=True, blank=True)
     response = models.TextField(null=True, blank=True)
-    home = models.ForeignKey(Home, on_delete=models.CASCADE)
+    home = models.ForeignKey(Home, on_delete=models.CASCADE, related_name="requests")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
