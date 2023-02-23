@@ -25,19 +25,23 @@ class User(AbstractUser):
 
 
 class AccessTokens(models.Model):
-    token = models.TextField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    valid_to = models.DateTimeField(default=None)
+    token = models.TextField(primary_key=True, verbose_name="Токен")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Для пользователя")
+    valid_to = models.DateTimeField(default=None, verbose_name="Действителен до")
 
     class Meta:
+        verbose_name = "Токен доступа"
+        verbose_name_plural = "Токены доступа"
         db_table = "pr_access_tokens"
 
 
 class RefreshTokens(models.Model):
-    token = models.TextField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    valid_to = models.DateTimeField(default=None)
-    access = models.OneToOneField(AccessTokens, on_delete=models.CASCADE)
+    token = models.TextField(primary_key=True, verbose_name="Токен")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Для пользователя")
+    valid_to = models.DateTimeField(default=None, verbose_name="Действителен до")
+    access = models.OneToOneField(AccessTokens, on_delete=models.CASCADE, verbose_name="Токен доступа")
 
     class Meta:
+        verbose_name = "Токен обновления"
+        verbose_name_plural = "Токены обновления"
         db_table = "pr_refresh_tokens"
