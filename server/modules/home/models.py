@@ -11,6 +11,7 @@ class Home(models.Model):
     area = models.FloatField()
     create_dt = models.DateTimeField()
     is_deleted = models.BooleanField(default=False)
+    users = models.ManyToManyField(User, related_name="homes")
 
     def __str__(self):
         return f"{self.street} {self.home_number}"

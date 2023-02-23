@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import AccessTokens, RefreshTokens
+from .models import User, AccessTokens, RefreshTokens
+
+admin.site.register(User)
 
 
 @admin.register(AccessTokens)

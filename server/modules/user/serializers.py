@@ -15,13 +15,23 @@ class GroupSerializer(serializers.ModelSerializer):
         model = Group
         exclude = ["permissions"]
 
+    
+class HomeSerializer(serializers.Serializer):
+    street = serializers.CharField()
+    home_number = serializers.CharField()
+    microdistrict = serializers.CharField()
+    area = serializers.FloatField()
+    create_dt = serializers.DateTimeField()
+    is_deleted = serializers.BooleanField()
+
 
 class UserSerializer(serializers.ModelSerializer):
     groups = GroupSerializer(many=True, read_only=True)
+    homes = HomeSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
-        fields = ["id", "username", "first_name", "last_name", "email", "groups", "phone", "patronymic"]
+        fields = ["id", "username", "first_name", "last_name", "email", "groups", "phone", "patronymic", "homes"]
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
