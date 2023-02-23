@@ -30,7 +30,7 @@ class VotesViews(ReadOnlyModelViewSet):
     def retrieve(self, request, *args, **kwargs):
         home_id = kwargs["pk"]
         user_id = request.user.id
-        data = self.serializer_class(Votes.objects.filter(isActive=True, home_id=home_id), many=True).data
+        data = self.serializer_class(Votes.objects.filter(home_id=home_id), many=True).data
         jsona = json.loads(json.dumps(data))
         for item in jsona:
             for i, variant in enumerate(item["variants"]):
