@@ -17,6 +17,7 @@ class GroupSerializer(serializers.ModelSerializer):
 
     
 class HomeSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
     street = serializers.CharField()
     home_number = serializers.CharField()
     microdistrict = serializers.CharField()
