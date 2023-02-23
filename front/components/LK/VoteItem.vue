@@ -25,7 +25,7 @@
     </v-card-text>
     <v-card-actions v-if="item.isActive"> 
       <v-spacer></v-spacer>
-      <v-btn color="primary">Проголосовать</v-btn></v-card-actions>
+      <v-btn @click="onVoteSend" color="primary">Проголосовать</v-btn></v-card-actions>
   </v-card>
 </template>
 
@@ -40,7 +40,11 @@ export default {
   props: {
     item: {},
   },
-  methods: {},
+  methods: {
+    onVoteSend(){
+      this.$emit("onVoteSend", this.item)
+    }
+  },
   computed: {
     totalVotes() {
       return this.item.variants.reduce((a, b) => {

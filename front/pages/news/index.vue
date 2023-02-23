@@ -51,6 +51,13 @@
 <script>
 export default {
   name: "Test",
+  created(){
+    this.$axios.get("/api/v1/news").then(
+      res=>{
+        this.news = res.data
+      }
+    )
+  },
   data() {
     return {
       query: "",

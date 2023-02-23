@@ -10,9 +10,17 @@
           clearable
           required
           :error-messages="emailErrors"
-          v-model="email"
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
+          v-model="author_email"
+          @input="$v.author_email.$touch()"
+          @blur="$v.author_email.$touch()"
+        ></v-text-field>
+        <v-text-field
+          label="Тема вопроса"
+          placeholder="Тема"
+          solo
+          clearable
+          required
+          v-model="theme"
         ></v-text-field>
         <v-textarea
           label="Задайте вопрос"
@@ -47,13 +55,14 @@ import Swal from "sweetalert2";
 export default {
   mixins: [validationMixin],
   validations: {
-    email: { required, email },
+    author_email: { required, email },
     question: { required, maxLength: maxLength(100), minLength: minLength(10) },
   },
   data() {
     return {
-      email: "",
+      author_email: "",
       question: "",
+      theme: ""
     };
   },
   methods: {
@@ -70,10 +79,11 @@ export default {
         return;
       }
 
-      let email = this.email;
+      let author_email = this.author_email;
       let question = this.question;
-      this.$emit("suggestQuestion", { email, question });
-      this.question = this.email = "";
+      let theme = this.theme;
+      this.$emit("suggestQuestion", { author_email, question, theme });
+      this.question = this.author_email = "";
       this.$v.$reset();
     },
   },
@@ -88,9 +98,9 @@ export default {
     },
     emailErrors() {
       const errors = [];
-      if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.email && errors.push("Неверный формат почты");
-      !this.$v.email.required && errors.push("Укажите электронную почту");
+      if (!this.$v.author_email.$dirty) return errors;
+      !this.$v.author_email.email && errors.push("Неверный формат почты");
+      !this.$v.author_email.required && errors.push("Укажите электронную почту");
       return errors;
     },
   },

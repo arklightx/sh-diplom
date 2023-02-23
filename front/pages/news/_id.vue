@@ -10,7 +10,7 @@
           <v-img
             class="d-flex text-center main_img align-center justify-center"
             gradient="to top right, rgba(0,0,0,.1), rgba(25,32,72,.8)"
-            :src="base + newsItem.image"
+            :src="newsItem.image"
             height="400"
           >
             <h1 class="text-h4 text-md-h2 mb-2 font-weight-medium">
@@ -25,7 +25,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn disabled>{{ newsItem.create_dt }}</v-btn>
+            <v-btn disabled>{{ moment(newsItem.create_at).format('MM-DD-YYYY HH:mm') }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -35,23 +35,18 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import moment from "moment"
 export default {
   created() {
+    this.moment = moment
     this.id = this.$route.params.id;
-
-    this.$axios
-      .get(`api/v1/news-commentaries/?news=${this.id}`)
-      .then((res) => {
-        this.newsComments = res.data.data.results;
-      })
-      .catch((err) => {
-        this.newsComments = false;
-      });
+    console.log(moment)
 
     this.$axios
       .get(`api/v1/news/${this.id}`)
       .then((res) => {
-        this.newsItem = res.data.data;
+        this.newsItem = res.data;
+        console.log(this.newsItem)
       })
       .catch((err) => {
         this.error = err;

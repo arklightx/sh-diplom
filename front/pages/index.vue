@@ -26,7 +26,7 @@
         <v-card class="mt-2">
           <v-card-title>Наши дома</v-card-title>
           <v-card-text>
-            <div class="d-flex justify-space-between">
+            <div class="d-flex flex-wrap w-100 justify-space-between">
               <home-item
                 class="w-50"
                 :item="item"
@@ -92,6 +92,12 @@ export default {
     this.$axios.get("/api/v1/homes").then(
       res=>{
         this.homes = res.data
+        console.log(this.homes)
+      }
+    )
+    this.$axios.get("/api/v1/news").then(
+      res=>{
+        this.news = res.data
       }
     )
     this.$axios.get("api/v1/questions").then((res) => {
@@ -211,9 +217,15 @@ export default {
 
 <style>
 .w-50 {
-  width: 49%;
+  width: 49% !important;
+  position: relative;
+  
 }
 .main_img {
   margin-top: -25px;
+}
+
+.w-100{
+  width: 100%;
 }
 </style>

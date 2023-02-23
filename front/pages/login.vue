@@ -21,7 +21,7 @@ export default{
                 if(res){
                     console.log(res)
                     this.errors = null
-                    this.$router.push('/')
+                    this.$router.push('/lk')
                 }
             }).catch(err=>{
                 this.errors = err

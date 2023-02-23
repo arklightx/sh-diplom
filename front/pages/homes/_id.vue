@@ -6,7 +6,7 @@
         <div class="mb-2">
           <Nuxt-link class="text-caption" to="/homes">Ко всем домам</Nuxt-link>
         </div>
-        <v-card>
+        <v-card v-if="home">
           <v-card-text class="d-flex">
             <v-img
               height="250px"
@@ -26,17 +26,17 @@
               </div>
               <div class="d-flex align-center mb-2">
                 <v-icon class="mr-2">mdi-home-city</v-icon>
-                {{ home.appartments }} кв
+                {{ appartments }} кв
               </div>
               <div class="d-flex align-center mb-2">
                 <v-icon class="mr-2">mdi-calendar-clock</v-icon>
                 Построен в
-                {{ home.create_dt }} году
+                {{ moment(home.create_dt).format("YYYY") }} году
               </div>
               <div class="d-flex align-center mb-2">
                 <v-icon class="mr-2">mdi-home-floor-l</v-icon>
                 количество этажей
-                {{ home.levels }}
+                {{ home.levels.length }}
               </div>
             </div>
           </v-card-text>
@@ -74,7 +74,7 @@
                     </div>
                     <div v-for="(item, index) in value" :key="index">
                       <div class="blue-grey darken-4 mb-2">
-                        <a :href="item.src">
+                        <a :href="item.file">
                           {{ item.title }}
                         </a>
                       </div>
@@ -86,8 +86,8 @@
             <v-card class="mt-4 blue-grey darken-4">
               <v-card-title> Дом обслуживают</v-card-title>
               <div class="pa-4">
-                <person-item
-                  v-for="(item, key) in personal"
+                <person-item class="mb-2"
+                  v-for="(item, key) in home.staffs"
                   :key="key"
                   :item="item"
                 ></person-item>
@@ -105,6 +105,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import moment from "moment";
 import groupByKey from "~/helpers/groupByKey";
 import PersonItem from "~/components/homes/PersonItem.vue";
 export default {
@@ -113,20 +114,13 @@ export default {
   },
   created() {
     this.id = this.$route.params.id;
-
+    this.moment = moment;
     this.$axios
-      .get(`api/v1/news-commentaries/?news=${this.id}`)
+      .get(`api/v1/homes/${this.id}`)
       .then((res) => {
-        this.newsComments = res.data.data.results;
-      })
-      .catch((err) => {
-        this.newsComments = false;
-      });
-
-    this.$axios
-      .get(`api/v1/news/${this.id}`)
-      .then((res) => {
-        this.newsItem = res.data.data;
+        this.home = res.data;
+        this.documents = this.home.documents;
+        console.log(this.home)
       })
       .catch((err) => {
         this.error = err;
@@ -142,36 +136,11 @@ export default {
         { text: "План. дата отключения", value: "disable_dt" },
         { text: "План. дата включения", value: "enable_dt" },
         { text: "Факт. дата включения", value: "fact_dt" },
-        { text: "Квартира", value: "apartment" },
+        { text: "Квартира", value: "aparment" },
       ],
       id: -1,
-      home: {
-        id: 1,
-        street: "asdasd",
-        home_number: 1233,
-        area: "123123.23",
-        create_dt: 20,
-      },
-      disablings: [
-        {
-          status: "Включен",
-          resource: "Горячая вода",
-          reason: "Причина",
-          disable_dt: "02.03.2022",
-          enable_dt: "22.03.2022",
-          fact_dt: "22.03.2023",
-          apartment: "32, 34",
-        },
-        {
-          status: "Включен",
-          resource: "Горячая вода",
-          reason: "Причина",
-          disable_dt: "02.03.2022",
-          enable_dt: "22.03.2022",
-          fact_dt: "22.03.2023",
-          apartment: "32, 34",
-        },
-      ],
+      home: false,
+      
       documents: [
         {
           type: "Годовые отчёты",
@@ -211,6 +180,26 @@ export default {
     },
     groupedDocuments() {
       return groupByKey("type", this.documents);
+    },
+    appartments() {
+      let count = 0;
+      if (this.home?.levels) {
+        for (let level of this.home.levels) {
+          count += level.apartments.length;
+        }
+      }
+      return count;
+    },
+    disablings() {
+      let res = [];
+      if (this.home) {
+        for (let level of [...this.home.levels]) {
+          for (let apartment of level.apartments) {
+            res.push(...apartment.disablings)
+          }
+        }
+      }
+      return res
     },
   },
 };

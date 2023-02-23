@@ -23,7 +23,7 @@
             filled
           ></v-text-field>
           <v-card-text>
-            <div class="d-flex justify-space-between">
+            <div class="d-flex flex-wrap justify-space-between">
               <home-item
                 class="w-50"
                 :item="item"

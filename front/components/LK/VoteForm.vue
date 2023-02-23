@@ -68,7 +68,7 @@ export default {
     submit() {
       this.$refs.form.validate();
       if (this.valid) {
-        this.emit("submit", this.vote);
+        this.$emit("submit", this.vote);
       }
     },
   },

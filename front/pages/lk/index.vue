@@ -25,6 +25,7 @@
                   v-model="user.second_name"
                   filled
                   required
+                  disabled
                   outlined
                   :rules="requiredRules"
                   label="Фамилия"
@@ -33,6 +34,7 @@
                   v-model="user.first_name"
                   filled
                   outlined
+                  disabled
                   required
                   :rules="requiredRules"
                   label="Имя"
@@ -41,6 +43,7 @@
                   v-model="user.middle_name"
                   filled
                   outlined
+                  disabled
                   required
                   :rules="requiredRules"
                   label="Отчество"
@@ -49,6 +52,7 @@
                   v-model="user.login"
                   filled
                   outlined
+                  disabled
                   required
                   :rules="requiredRules"
                   label="Логин"
@@ -57,6 +61,7 @@
                   v-model="user.email"
                   filled
                   required
+                  disabled
                   :rules="emailRules"
                   outlined
                   label="Почта"
@@ -64,6 +69,7 @@
                 <v-text-field
                   filled
                   outlined
+                  disabled
                   v-model="user.password"
                   required
                   :rules="requiredRules"
@@ -80,19 +86,20 @@
         <v-card class="mt-2">
           <v-card-title>Ваш дом</v-card-title>
           <v-card-text>
-            <home-item :item="home"></home-item>
+            <home-item v-if="home" :item="home"></home-item>
             <v-card>
               <v-card-title class="mb-3">Голосования</v-card-title>
               <v-card-subtitle>Активные</v-card-subtitle>
               <v-card-text>
                 <vote-item
+                  @onVoteSend="sendVote"
                   class="mb-3"
                   :key="key"
                   :item="vote"
                   v-for="(vote, key) in activeVotings"
                 ></vote-item>
                 <div class="d-flex justify-center flex-column">
-                  <vote-form v-if="suggestStatus"></vote-form>
+                  <vote-form @submit="submitVote" v-if="suggestStatus"></vote-form>
                   <v-btn
                     @click="suggestStatus = !suggestStatus"
                     class="align-self-center mt-2"
@@ -120,12 +127,17 @@
               <v-card-title> Обращения </v-card-title>
               <v-card-text>
                 <request-item
+                  class="mb-6"
                   v-for="(item, key) in requests"
                   :key="key"
                   :item="item"
                 ></request-item>
                 <div class="d-flex justify-center flex-column">
-                  <request-form class="mt-4" v-if="suggestRequestStatus"></request-form>
+                  <request-form
+                    @submit="submitRequest"
+                    class="mt-4"
+                    v-if="suggestRequestStatus"
+                  ></request-form>
                   <v-btn
                     @click="suggestRequestStatus = !suggestRequestStatus"
                     class="align-self-center mt-2"
@@ -141,6 +153,13 @@
                 <events-block class="mt-4" :events="events" />
               </v-card-text>
             </v-card>
+            <v-card-title>Видеособрания жильцов</v-card-title>
+            <Jitsy v-if="showJitsy" :homeId="home.id" />
+
+            <div class="d-flex justify-center flex-column">
+              <v-btn @click="showJitsy = false" v-if="showJitsy" primary> Отключиться</v-btn>
+              <v-btn @click="showJitsy = true" v-else primary> Подключиться</v-btn>
+            </div>
           </v-card-text>
         </v-card>
       </v-col>
@@ -149,6 +168,8 @@
   </v-container>
 </template>
 <script>
+import { mapState } from "vuex";
+import Swal from "sweetalert2";
 import VoteForm from "~/components/LK/VoteForm.vue";
 import NewsItem from "@/components/news/NewsItem.vue";
 import HomeItem from "@/components/homes/HomeItem.vue";
@@ -159,8 +180,10 @@ import RequestForm from "~/components/LK/RequestForm.vue";
 import RequestItem from "~/components/LK/RequestItem.vue";
 import EventsCalendar from "~/components/LK/EventsCalendar.vue";
 import EventsBlock from "~/components/LK/EventsBlock.vue";
+import Jitsy from "~/components/UI/Jitsi.vue";
 export default {
   components: {
+    Jitsy,
     NewsItem,
     HomeItem,
     VoteItem,
@@ -171,16 +194,45 @@ export default {
     EventsCalendar,
     EventsBlock,
   },
+  async created() {
+    this.$axios
+      .get(`api/v1/events/${this.home.id}`, {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${this.token}` },
+      })
+      .then((res) => {
+        this.events = res.data;
+      });
+
+    this.$axios
+      .get(`api/v1/requests/${this.home.id}`, {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${this.token}` },
+      })
+      .then((res) => {
+        this.requests = res.data;
+      });
+
+    this.$axios
+      .get(`api/v1/votes/${this.home.id}`, {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${this.token}` },
+      })
+      .then((res) => {
+        this.votings = res.data;
+      });
+  },
   data() {
     return {
+      showJitsy: false,
       events: [
         {
           name: "Я ненавижу галкина",
-          start:  new Date().setDate(new Date().getDate() + 3),
+          start: new Date().setDate(new Date().getDate() + 3),
           end: new Date().setDate(new Date().getDate() + 6),
           timed: true,
           color: "blue",
-          description: "asdasd"
+          description: "asdasd",
         },
         {
           name: "Я ненавижу галкина и пугачёву",
@@ -196,22 +248,7 @@ export default {
         (v) => /.+@.+\..+/.test(v) || "Неверный формат почты",
       ],
       requiredRules: [(v) => !!v || "Поле обязательно"],
-      user: {
-        first_name: "",
-        second_name: "",
-        middle_name: "",
-        login: "",
-        email: "",
-        password: "",
-      },
       suggestStatus: false,
-      home: {
-        id: 1,
-        street: "asdasd",
-        home_number: 1233,
-        area: "123123.23",
-        create_dt: 20,
-      },
       suggestRequestStatus: false,
       votings: [
         {
@@ -247,6 +284,77 @@ export default {
     };
   },
   methods: {
+    submitRequest(data) {
+      this.$axios
+        .post(
+          `api/v1/requests/`,
+          {
+            user: this.user.id,
+            home: this.home.id,
+            theme: data.theme,
+            text: data.text,
+          },
+          {
+            withCredentials: true,
+            headers: { Authorization: `Bearer ${this.token}` },
+          }
+        )
+        .then((res) => {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Запрос отправлен!",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        });
+    },
+    submitVote(data) {
+      this.$axios
+        .post(
+          `api/v1/createvote/`,
+          {
+            user: this.user.id,
+            home: this.home.id,
+            theme: data.theme,
+            variant: data.variants,
+          },
+          {
+            withCredentials: true,
+            headers: { Authorization: `Bearer ${this.token}` },
+          }
+        )
+        .then((res) => {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Голосование отправлено!",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        });
+    },
+    sendVote(item) {
+      const selectedId = item.variants.find((i) => i.label === item.userVariant).id;
+      this.$axios
+        .post(
+          `api/v1/vote-user/`,
+          { id: selectedId },
+          {
+            withCredentials: true,
+            headers: { Authorization: `Bearer ${this.token}` },
+          }
+        )
+        .then((res) => {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Голос отправлен!",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        });
+    },
     submitInfo() {
       this.$refs.infoForm.validate();
       console.log(this.infoForm);
@@ -278,6 +386,9 @@ export default {
     },
   },
   computed: {
+    user() {
+      return { ...this.$store.getters["auth/getUser"] };
+    },
     computedNews() {
       return this.news.slice(0, 4);
     },
@@ -292,6 +403,16 @@ export default {
     },
     unactiveVotings() {
       return this.votings.filter((item) => !item.isActive);
+    },
+    token() {
+      return this.$store.getters["auth/getAccessToken"];
+    },
+    home() {
+      if (this.user?.homes) {
+        console.log(this.user);
+        return this.user?.homes[0];
+      }
+      return false;
     },
   },
 };

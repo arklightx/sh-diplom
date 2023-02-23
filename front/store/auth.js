@@ -34,6 +34,7 @@ export const actions = {
                 .then((res) => {
                     let data = res.data;
                     let user = data.user;
+                    console.log(data)
                     Cookies.set("user", JSON.stringify(user), { expires: 7 });
                     commit("setAccessToken", data.access);
                     commit("setUser", user);
@@ -77,7 +78,8 @@ export const actions = {
                     { withCredentials: true }
                 )
                 .then((res) => {
-                    let result = res.data.data;
+                    let result = res.data;
+                    
                     commit("setAccessToken", result.access);
                     let user = this.$cookiz.get("user");
                     commit("setUser", user);
@@ -116,6 +118,7 @@ export const actions = {
 
 export const mutations = {
     setAccessToken(state, token) {
+        console.log(token)
         state.accessToken = token;
     },
     setRefreshToken(state, token) {

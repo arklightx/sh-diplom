@@ -10,7 +10,7 @@
         </div>
         <div class="d-flex align-center mb-2">
           <v-icon class="mr-2">mdi-home-city</v-icon>
-          {{ item.appartments }} кв
+          {{ appartments }} кв
         </div>
         <div class="d-flex align-center mb-2">
           <v-icon class="mr-2">mdi-calendar-clock</v-icon>
@@ -39,7 +39,15 @@ export default {
   props: {
     item: {},
   },
-  methods: {},
+  computed: {
+    appartments() {
+      let count = 0
+      if(this.item.levels){
+        this.item.levels.forEach(item=>count+=item.apartments.length)
+      }
+      return count
+    },
+  },
 };
 </script>
 

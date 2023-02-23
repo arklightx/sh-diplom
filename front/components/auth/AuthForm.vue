@@ -7,7 +7,7 @@
 					<v-text-field v-model="login" :error-messages="nameErrors" label="Имя пользователя" required
 						@input="$v.login.$touch()" @blur="$v.login.$touch()"></v-text-field>
 					<v-text-field type="password" v-model="password" :error-messages="passErrors" label="Пароль"
-						required @input="$v.password.$touch()" @blur="$v.password.$touch()"></v-text-field>X
+						required @input="$v.password.$touch()" @blur="$v.password.$touch()"></v-text-field>
 					<v-btn class="mr-4 primary" @click="submit">
 						Войти
 					</v-btn>
@@ -31,7 +31,7 @@ export default {
 	mixins: [validationMixin],
 	validations: {
 		login: { required },
-		password: { required, minLength: minLength(8) }
+		password: { required, minLength: minLength(4) }
 	},
 	data: () => ({
 		login: '',

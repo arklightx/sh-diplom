@@ -56,7 +56,7 @@
 
     validations: {
       username: { required},
-      password: { required, minLength: minLength(8)}
+      password: { required, minLength: minLength(4)}
     },
 
     data: () => ({

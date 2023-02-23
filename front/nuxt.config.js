@@ -21,6 +21,13 @@ export default {
             { name: "format-detection", content: "telephone=no" },
         ],
         link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+        script: [
+            {
+                type: "text/javascript",
+                src: "https://meet.jit.si/external_api.js",
+                async: true,
+            },
+        ],
     },
 
     // Global CSS: https://go.nuxtjs.dev/config-css
@@ -37,7 +44,6 @@ export default {
         // https://go.nuxtjs.dev/vuetify
         "@nuxtjs/vuetify",
         "@nuxtjs/moment",
-        
     ],
     moment: {
         defaultLocale: "ru",
@@ -47,14 +53,13 @@ export default {
     modules: [
         // https://go.nuxtjs.dev/axios
         "@nuxtjs/axios",
-        ['cookie-universal-nuxt', { alias: 'cookiz' }],
+        ["cookie-universal-nuxt", { alias: "cookiz" }],
     ],
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
     axios: {
         // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-        baseURL:
-           "http://localhost:8000/",
+        baseURL: "http://127.0.0.1:8000/",
     },
 
     // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

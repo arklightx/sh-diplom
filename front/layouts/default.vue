@@ -2,7 +2,7 @@
 	<v-app>
 		<Header class="z-index-12" />
 		<v-main>
-			<v-container v-if="isLoggedIn">
+			<v-container v-if="accessToken">
 				<Nuxt class="z-index-1" />
 			</v-container>
 		</v-main>

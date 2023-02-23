@@ -21,11 +21,11 @@ export const globalMenu = [
         title: "Дома",
         to: "/homes"
     },
-    {
-        ico: "mdi-currency-usd",
-        title: "Платные услуги",
-        to: "/prices"
-    },
+    // {
+    //     ico: "mdi-currency-usd",
+    //     title: "Платные услуги",
+    //     to: "/prices"
+    // },
     // {
     //     ico: "mdi-information-outline",
     //     title: "О факультете",

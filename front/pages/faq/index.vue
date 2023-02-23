@@ -123,8 +123,7 @@ export default {
     suggestQuestion(question) {
       this.$axios
         .post("api/v1/questions/", {
-          author_email: question.email,
-          question: question.question,
+          ...question
         })
         .then((res) => {
           Swal.fire({
