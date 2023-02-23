@@ -24,6 +24,7 @@ class HomeSerializer(serializers.Serializer):
     area = serializers.FloatField()
     create_dt = serializers.DateTimeField()
     is_deleted = serializers.BooleanField()
+    jitsi = serializers.CharField()
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -1,3 +1,4 @@
+import uuid
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -12,6 +13,7 @@ class Home(models.Model):
     create_dt = models.DateTimeField()
     is_deleted = models.BooleanField(default=False)
     users = models.ManyToManyField(User, related_name="homes")
+    jitsi = models.CharField(max_length=128, blank=True, null=False, default=uuid.uuid4(), unique=True)
 
     def __str__(self):
         return f"{self.street} {self.home_number}"
