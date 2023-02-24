@@ -157,7 +157,9 @@
             <Jitsy v-if="showJitsy" :homeId="home.id" />
 
             <div class="d-flex justify-center flex-column">
-              <v-btn @click="showJitsy = false" v-if="showJitsy" primary> Отключиться</v-btn>
+              <v-btn @click="showJitsy = false" v-if="showJitsy" primary>
+                Отключиться</v-btn
+              >
               <v-btn @click="showJitsy = true" v-else primary> Подключиться</v-btn>
             </div>
           </v-card-text>
@@ -195,32 +197,37 @@ export default {
     EventsBlock,
   },
   async created() {
-    this.$axios
-      .get(`api/v1/events/${this.home.id}`, {
-        withCredentials: true,
-        headers: { Authorization: `Bearer ${this.token}` },
-      })
-      .then((res) => {
-        this.events = res.data;
-      });
+    if (!this.user) {
+      this.$router.push("/login");
+    }
+    setTimeout(() => {
+      this.$axios
+        .get(`api/v1/events/${this.home.id}`, {
+          withCredentials: true,
+          headers: { Authorization: `Bearer ${this.token}` },
+        })
+        .then((res) => {
+          this.events = res.data;
+        });
 
-    this.$axios
-      .get(`api/v1/requests/${this.home.id}`, {
-        withCredentials: true,
-        headers: { Authorization: `Bearer ${this.token}` },
-      })
-      .then((res) => {
-        this.requests = res.data;
-      });
+      this.$axios
+        .get(`api/v1/requests/${this.home.id}`, {
+          withCredentials: true,
+          headers: { Authorization: `Bearer ${this.token}` },
+        })
+        .then((res) => {
+          this.requests = res.data;
+        });
 
-    this.$axios
-      .get(`api/v1/votes/${this.home.id}`, {
-        withCredentials: true,
-        headers: { Authorization: `Bearer ${this.token}` },
-      })
-      .then((res) => {
-        this.votings = res.data;
-      });
+      this.$axios
+        .get(`api/v1/votes/${this.home.id}`, {
+          withCredentials: true,
+          headers: { Authorization: `Bearer ${this.token}` },
+        })
+        .then((res) => {
+          this.votings = res.data;
+        });
+    }, 200);
   },
   data() {
     return {

@@ -22,7 +22,6 @@ export const actions = {
                 })
                 .catch((err) => {
                     commit("setIsLoggedIn", false)
-
                     reject("Проверьте данные");
                 });
         });

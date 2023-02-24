@@ -6,7 +6,7 @@
   >
     <v-img
       gradient="to top right, rgba(0,0,0,.1), rgba(25,32,72,.8)"
-      :src="base + item.image"
+      :src="item.image"
       height="200px"
       class="card_img"
     ></v-img>
@@ -15,7 +15,7 @@
         {{ item.title }}
       </v-card-title>
       <v-card-subtitle class="body-2 text--secondary">
-        {{ item.create_at }}
+        {{ moment(item.create_at).format("DD-MM-YYYY") }}
       </v-card-subtitle>
       <v-card-text class="text--secondary card_desc body-1 font-weight-medium">
         {{ item.description }}
@@ -32,7 +32,11 @@
 
 <script>
 import { mapState } from "vuex";
+import moment from "moment";
 export default {
+  created(){
+    this.moment = moment
+  },
   props: {
     item: {
       type: Object,

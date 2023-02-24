@@ -2,8 +2,8 @@
 	<v-app>
 		<Header class="z-index-12" />
 		<v-main>
-			<v-container v-if="accessToken">
-				<Nuxt class="z-index-1" />
+			<v-container>
+				<Nuxt v-if="isLoggedIn" class="z-index-1" />
 			</v-container>
 		</v-main>
 		<Footer class="z-index-10" />
