@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     "modules.reqs_to_company",
     "modules.votes",
     "modules.events",
-    "modules.news"
+    "modules.news",
+    "modules.company"
 ]
 
 MIDDLEWARE = [
@@ -81,8 +82,7 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.OrderingFilter',
         'rest_framework.filters.SearchFilter'
-    ],
-    'EXCEPTION_HANDLER': 'core.exception_receiver.err_handler'
+    ]
 }
 
 ROOT_URLCONF = 'server.urls'

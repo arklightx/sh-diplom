@@ -14,6 +14,7 @@ class Home(models.Model):
     is_deleted = models.BooleanField(default=False, verbose_name="Удалён из системы")
     users = models.ManyToManyField(User, related_name="homes", verbose_name="Жильцы")
     jitsi = models.CharField(max_length=128, blank=True, null=False, default=uuid.uuid4(), unique=True, verbose_name="GUID конференции")
+    messanger_link = models.CharField(max_length=1000, blank=True, null=True, verbose_name="Ссылка на мессенджер")
 
     class Meta:
         verbose_name = "Дом"
