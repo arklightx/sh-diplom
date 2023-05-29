@@ -1,12 +1,7 @@
 <template>
-  <v-card color="blue-grey darken-4">
-    <v-card-title>События</v-card-title>
-    <div class="d-flex pa-2 justify-space-between">
-      <events-calendar
-        class="w-60"
-        @getEvent="getEvent"
-        :events="events"
-      ></events-calendar>
+  <v-card height="600px" color="blue-grey darken-4">
+    <div class="d-flex h-100 pa-2 justify-space-between">
+      <events-calendar class="w-60" @getEvent="getEvent" :events="events"></events-calendar>
       <div class="ml-4 w-40">
         <event-item v-if="currentEvent" :event="currentEvent"></event-item>
         <v-alert v-else outlined type="info">
@@ -45,6 +40,11 @@ export default {
 .w-60 {
   width: 60%;
 }
+
+.h-100 {
+  height: 100%;
+}
+
 .w-40 {
   width: 40%;
 }

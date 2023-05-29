@@ -11,21 +11,6 @@ export const state = () => ({
 });
 
 export const actions = {
-    checkToken({ commit }, data) {
-        return new Promise((resolve, reject) => {
-            this.$axios
-                .post("api/auth/check_token/", null, { withCredentials: true })
-                .then((res) => {
-                    let data = res.data.data;
-                    commit("setIsLoggedIn", true)
-                    return resolve(data)
-                })
-                .catch((err) => {
-                    commit("setIsLoggedIn", false)
-                    reject("Проверьте данные");
-                });
-        });
-    },
     login({ commit }, data) {
         return new Promise((resolve, reject) => {
             this.$axios
@@ -41,30 +26,6 @@ export const actions = {
                 })
                 .catch((err) => {
                     reject("Проверьте данные");
-                });
-        });
-    },
-    confirm({ commit }, data) {
-        return new Promise((resolve, reject) => {
-            this.$axios
-                .post("api/auth/confirm_email/", data)
-                .then((res) => {
-                    resolve(res);
-                })
-                .catch((err) => {
-                    reject("Проверьте данные");
-                });
-        });
-    },
-    signUp({ commit }, data) {
-        return new Promise((resolve, reject) => {
-            this.$axios
-                .post("/api/auth/register/", data, { withCredentials: true })
-                .then((res) => {
-                    resolve("resolve");
-                })
-                .catch((err) => {
-                    reject("Такой аккаунт уже есть");
                 });
         });
     },

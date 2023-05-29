@@ -8,11 +8,7 @@
         </div>
         <v-card v-if="home">
           <v-card-text class="d-flex">
-            <v-img
-              height="250px"
-              max-width="300px"
-              :src="require('@/assets/images/home_illustration.png')"
-            >
+            <v-img height="250px" max-width="300px" :src="require('@/assets/images/home_illustration.png')">
             </v-img>
             <div>
               <v-card-title class="primary--text">
@@ -38,6 +34,10 @@
                 количество этажей
                 {{ home.levels.length }}
               </div>
+              <div class="d-flex align-center mb-2">
+                <v-icon class="mr-2">mdi-link</v-icon>
+                <a :href="home.messanger_link">Ссылка на мессенджер</a>
+              </div>
             </div>
           </v-card-text>
 
@@ -48,12 +48,8 @@
                   Просмотреть отключения
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  <v-data-table
-                    :headers="headers"
-                    :items="disablings"
-                    :items-per-page="5"
-                    class="elevation-1"
-                  ></v-data-table>
+                  <v-data-table :headers="headers" :items="disablings" :items-per-page="5"
+                    class="elevation-1"></v-data-table>
                 </v-expansion-panel-content>
               </v-expansion-panel>
               <v-expansion-panel class="mb-1 blue-grey darken-4">
@@ -61,12 +57,8 @@
                   Просмотреть документы
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  <div
-                    v-if="Object.keys(groupedDocuments).length > 0"
-                    v-for="(value, name) in groupedDocuments"
-                    class="pt-2"
-                    :key="name"
-                  >
+                  <div v-if="Object.keys(groupedDocuments).length > 0" v-for="(value, name) in groupedDocuments"
+                    class="pt-2" :key="name">
                     <div v-if="value.length != 0" class="py-4">
                       <v-chip>
                         {{ name }}
@@ -86,11 +78,7 @@
             <v-card class="mt-4 blue-grey darken-4">
               <v-card-title> Дом обслуживают</v-card-title>
               <div class="pa-4">
-                <person-item class="mb-2"
-                  v-for="(item, key) in home.staffs"
-                  :key="key"
-                  :item="item"
-                ></person-item>
+                <person-item class="mb-2" v-for="(item, key) in home.staffs" :key="key" :item="item"></person-item>
               </div>
             </v-card>
           </v-card-text>
@@ -140,7 +128,7 @@ export default {
       ],
       id: -1,
       home: false,
-      
+
       documents: [
         {
           type: "Годовые отчёты",
@@ -212,15 +200,19 @@ export default {
 .w-100 {
   width: 100% !important;
 }
+
 .comments {
   margin: 0 auto;
 }
+
 .news-paragraph-image img {
   max-width: 100% !important;
 }
+
 a {
   text-decoration: none;
 }
+
 a:hover {
   text-decoration: underline;
 }
