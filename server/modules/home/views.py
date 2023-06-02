@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from modules.home.models import Home, HomeLevel, Apartment, Staff
-from modules.home.serializers import HomeSerializer, HomeLevelSerializer, ApartmentSerializer, StaffSerializer
+from modules.home.serializers import HomeSerializer, HomeLevelSerializer, ApartmentSerializer, StaffSerializer, StaffFeedbackSerializer
 
 
 class HomeView(ReadOnlyModelViewSet):
@@ -31,4 +31,11 @@ class StaffView(ReadOnlyModelViewSet):
     queryset = Staff.objects.all()
     permission_classes = [AllowAny]
     serializer_class = StaffSerializer
+    authentication_classes = []
+
+
+class StaffFeedbackView(ModelViewSet):
+    queryset = Staff.objects.all()
+    permission_classes = [AllowAny]
+    serializer_class = StaffFeedbackSerializer
     authentication_classes = []

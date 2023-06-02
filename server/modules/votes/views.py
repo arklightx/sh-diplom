@@ -24,9 +24,6 @@ class VotesViews(ReadOnlyModelViewSet):
     serializer_class = VotesSerializer
     permission_classes = [IsAuthenticated]
 
-    def list(self, request, *args, **kwargs):
-        raise Exception('asdasd')
-
     def retrieve(self, request, *args, **kwargs):
         home_id = kwargs["pk"]
         user_id = request.user.id
