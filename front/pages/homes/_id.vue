@@ -1,5 +1,21 @@
 <template>
   <v-container class="pa-2">
+    <v-dialog max-width="600" v-model="showFeedback">
+      <v-card>
+        <v-card-title>Оставьте отзыв</v-card-title>
+        <v-card-text>
+          <v-form>
+            <v-rating v-model="feedback.star" class="my-4" size="48" bg-color="orange-lighten-1" color="blue"></v-rating>
+            <v-textarea v-model="feedback.feedback" outlined hint="Оставьте отзыв" label="Отзыв"></v-textarea>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn @click="sendFeedback">Отправить</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
     <v-row no-gutters>
       <v-col class="col col-2 d-none d-flex"> </v-col>
       <v-col class="col col-md-8 col-12">
@@ -41,7 +57,15 @@
             </div>
           </v-card-text>
 
-          <v-card-text class="">
+          <v-card-text>
+            <v-card class="mb-4" v-if="home.home_leader">
+              <v-card-title>Старший по дому</v-card-title>
+              <v-card-subtitle>{{ home.home_leader.first_name }} {{ home.home_leader.last_name }}</v-card-subtitle>
+              <v-card-text>
+                <div>Номер телефона: {{ home.home_leader.phone }}</div>
+                <div>Email: {{ home.home_leader.email }}</div>
+              </v-card-text>
+            </v-card>
             <v-expansion-panels>
               <v-expansion-panel class="mb-1 blue-grey darken-4">
                 <v-expansion-panel-header>
@@ -78,7 +102,8 @@
             <v-card class="mt-4 blue-grey darken-4">
               <v-card-title> Дом обслуживают</v-card-title>
               <div class="pa-4">
-                <person-item class="mb-2" v-for="(item, key) in home.staffs" :key="key" :item="item"></person-item>
+                <person-item @openFeedback="openFeedback" class="mb-2" v-for="(item, key) in home.staffs" :key="key"
+                  :item="item"></person-item>
               </div>
             </v-card>
           </v-card-text>
@@ -96,6 +121,7 @@ import { mapState } from "vuex";
 import moment from "moment";
 import groupByKey from "~/helpers/groupByKey";
 import PersonItem from "~/components/homes/PersonItem.vue";
+import Swal from "sweetalert2";
 export default {
   components: {
     PersonItem,
@@ -117,6 +143,11 @@ export default {
   data() {
     return {
       to: false,
+      feedback: {
+        star: 0,
+        staff: false,
+        feedback: ""
+      },
       headers: [
         { text: "Статус", value: "status" },
         { text: "Вид ресурса", value: "resource" },
@@ -128,7 +159,7 @@ export default {
       ],
       id: -1,
       home: false,
-
+      showFeedback: false,
       documents: [
         {
           type: "Годовые отчёты",
@@ -155,6 +186,46 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    openFeedback(id) {
+      this.feedback.staff = id
+      this.showFeedback = true
+    },
+    closeFeedback() {
+      this.feedback.staff = false
+      this.showFeedback = true
+    },
+    sendFeedback() {
+      this.$axios
+        .post(
+          `/api/v1/staff_feedback/ `,
+          this.feedback,
+          {
+            withCredentials: true,
+            headers: { Authorization: `Bearer ${this.token}` },
+          }
+        )
+        .then((res) => {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Отзыв отправлен",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        }).catch(() => {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Неверные данные",
+            showConfirmButton: false,
+            timer: 3000,
+          })
+        }).finally(() => {
+          this.showFeedback = false
+        })
+    }
   },
   computed: {
     ...mapState("auth", ["accessToken", "base"]),

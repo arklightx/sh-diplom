@@ -13,20 +13,19 @@
           <v-card-text>
             <v-card color="blue-grey darken-4">
               <v-form @submit.prevent="submitInfo" ref="infoForm" v-model="infoValid" class="pa-3">
-                <v-text-field v-model="user.second_name" filled required disabled outlined :rules="requiredRules"
+                <v-text-field v-model="user.last_name" filled required outlined :rules="requiredRules"
                   label="Фамилия"></v-text-field>
-                <v-text-field v-model="user.first_name" filled outlined disabled required :rules="requiredRules"
+                <v-text-field v-model="user.first_name" filled outlined required :rules="requiredRules"
                   label="Имя"></v-text-field>
-                <v-text-field v-model="user.middle_name" filled outlined disabled required :rules="requiredRules"
+                <v-text-field v-model="user.patronymic" filled outlined required :rules="requiredRules"
                   label="Отчество"></v-text-field>
-                <v-text-field v-model="user.login" filled outlined disabled required :rules="requiredRules"
-                  label="Логин"></v-text-field>
-                <v-text-field v-model="user.email" filled required disabled :rules="emailRules" outlined
+                <v-text-field v-model="user.phone" filled outlined required :rules="requiredRules"
+                  label="Телефон"></v-text-field>
+                <v-text-field v-model="user.email" filled required :rules="emailRules" outlined
                   label="Почта"></v-text-field>
-                <v-text-field filled outlined disabled v-model="user.password" required :rules="requiredRules"
-                  type="password" label="Пароль"></v-text-field>
                 <v-card-actions>
-                  <v-spacer></v-spacer> <v-btn color="primary">Сохранить</v-btn>
+                  <v-spacer></v-spacer>
+                  <v-btn @click="submitInfo" color="primary">Сохранить</v-btn>
                 </v-card-actions>
               </v-form>
             </v-card>
@@ -59,6 +58,27 @@ export default {
   methods: {
     submitInfo() {
       this.$refs.infoForm.validate();
+      if (this.infoValid) {
+        this.$axios
+          .patch(
+            `api/v1/users/change/private_data/`,
+            this.user,
+            {
+              withCredentials: true,
+              headers: { Authorization: `Bearer ${this.token}` },
+            }
+          )
+          .then((res) => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Информация обновлена",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          });
+      }
+
     },
   },
   computed: {
