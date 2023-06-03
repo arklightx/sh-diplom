@@ -31,7 +31,10 @@
             <div v-if="user.username" class="text-h6 pa-4">{{ user.username }}</div>
             <template v-if="username">
               <v-list-item exact to="/lk" nuxt class="primary--text">
-                <v-list-item-title color="primary"> Личный кабинет</v-list-item-title>
+                <v-list-item-title color="primary"> Профиль</v-list-item-title>
+              </v-list-item>
+              <v-list-item exact to="/lk/home" nuxt class="primary--text">
+                <v-list-item-title color="primary"> Мой дом</v-list-item-title>
               </v-list-item>
               <v-list-item exact to="/lk/events" nuxt class="primary--text">
                 <v-list-item-title color="primary"> Календарь событий</v-list-item-title>
@@ -41,6 +44,9 @@
               </v-list-item>
               <v-list-item exact to="/lk/votes" nuxt class="primary--text">
                 <v-list-item-title color="primary"> Голосования</v-list-item-title>
+              </v-list-item>
+              <v-list-item exact to="/lk/requests" nuxt class="primary--text">
+                <v-list-item-title color="primary"> Обращения</v-list-item-title>
               </v-list-item>
             </template>
 

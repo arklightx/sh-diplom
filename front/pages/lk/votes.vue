@@ -157,6 +157,12 @@ export default {
     token() {
       return this.$store.getters["auth/getAccessToken"];
     },
+    home() {
+      if (this.user?.homes) {
+        return this.user?.homes[0];
+      }
+      return false;
+    }
   },
 };
 </script>
