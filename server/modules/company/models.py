@@ -3,6 +3,9 @@ from django.db import models
 
 class Company(models.Model):
     name = models.CharField(max_length=80, verbose_name="Компания")
+    work_time = models.TextField(verbose_name="Время работы", default=None, null=True, blank=True)
+    address = models.TextField(verbose_name="Адрес", default=None, null=True, blank=True)
+    description = models.TextField(verbose_name="Описание", default=None, null=True, blank=True)
 
     def __str__(self) -> str:
         return self.name

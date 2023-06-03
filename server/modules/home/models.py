@@ -1,6 +1,7 @@
 import uuid
 from django.contrib.auth import get_user_model
 from django.db import models
+from modules.company.models import Company
 
 User = get_user_model()
 
@@ -15,6 +16,8 @@ class Home(models.Model):
     users = models.ManyToManyField(User, related_name="homes", verbose_name="Жильцы")
     jitsi = models.CharField(max_length=128, blank=True, null=False, default=uuid.uuid4(), unique=True, verbose_name="GUID конференции")
     messanger_link = models.CharField(max_length=1000, blank=True, null=True, verbose_name="Ссылка на мессенджер")
+    home_leader = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, default=None, verbose_name="Главная по дому")
+    company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True, blank=True, default=None, verbose_name="УК", related_name="homes")
 
     class Meta:
         verbose_name = "Дом"
@@ -62,3 +65,16 @@ class Staff(models.Model):
 
     def __str__(self) -> str:
         return f"{self.id}. Дом - {self.home.id}"
+
+
+class StaffFeedback(models.Model):
+    staff = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name="feedbacks", verbose_name="Персонал")
+    feedback = models.TextField(verbose_name="Отзыв")
+    star = models.IntegerField()
+
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
+
+    def __str__(self) -> str:
+        return f"Сотрудник №{self.staff.id}. Оценка: {self.star}"
