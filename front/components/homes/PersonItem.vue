@@ -2,10 +2,7 @@
   <v-card color="blue-grey darken-3">
     <v-card-text class="d-flex">
       <v-avatar width="150px" height="150px">
-        <v-img
-          gradient="to top right, rgba(0,0,0,.1), rgba(25,32,72,.8)"
-          :src="require('~/assets/images/avatar.jpg')"
-        >
+        <v-img gradient="to top right, rgba(0,0,0,.1), rgba(25,32,72,.8)" :src="require('~/assets/images/avatar.jpg')">
         </v-img>
       </v-avatar>
 
@@ -18,13 +15,17 @@
         </v-card-subtitle>
       </div>
     </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn @click="$emit('openFeedback', item.id)" color="primary">Оставить отзыв</v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
 <script>
 export default {
   name: "Test",
-  created() {},
+  created() { },
   data() {
     return {};
   },

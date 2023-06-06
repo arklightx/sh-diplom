@@ -2,7 +2,7 @@
   <v-card hover color="blue-grey darken-4">
     <v-card-text class="d-flex justify-space-between">
       <div>
-        {{ item.service }}
+        {{ item.service_name }}
       </div>
       <div>
         {{ item.price }}
