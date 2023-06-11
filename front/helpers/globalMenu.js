@@ -13,7 +13,7 @@ export const globalMenu = [
     
     {
         ico: "mdi-message-question",
-        title: "FAQ",
+        title: "Вопросы и ответы",
         to: "/faq"
     },
     {
@@ -22,7 +22,7 @@ export const globalMenu = [
         to: "/homes"
     },
     {
-        ico: "mdi-currency-usd",
+        ico: "mdi-currency-rub",
         title: "Платные услуги",
         to: "/prices"
     }

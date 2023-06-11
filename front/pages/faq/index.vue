@@ -3,31 +3,18 @@
     <v-row no-gutters>
       <v-col class="col col-1" />
       <v-col class="col col-md-10 col-12 pa-2 pt-0">
-        <v-img
-          class="d-flex text-center main_img align-center justify-center"
-          gradient="to top right, rgba(0,0,0,.1), rgba(25,32,72,.8)"
-          max-height="400px"
-          :src="require('@/assets/images/faq_main.png')"
-        >
-          <h1 class="text-h4 text-md-h2 mb-2 font-weight-medium">FAQ</h1>
+        <v-img class="d-flex text-center main_img align-center justify-center"
+          gradient="to top right, rgba(0,0,0,.1), rgba(25,32,72,.8)" max-height="400px"
+          :src="require('@/assets/images/faq_main.png')">
+          <h1 class="text-h4 text-md-h2 mb-2 font-weight-medium">Вопросы и ответы</h1>
         </v-img>
-        <v-text-field
-          class="courses__input_search mt-2"
-          placeholder="Поиск вопросов..."
-          persistent-hint
-          append-icon="mdi-magnify"
-          filled
-          v-model="query"
-        >
+        <v-text-field class="courses__input_search mt-2" placeholder="Поиск вопросов..." persistent-hint
+          append-icon="mdi-magnify" filled v-model="query">
         </v-text-field>
 
         <h1 class="text-h5 mb-0">Самые волнующие вопросы</h1>
-        <div
-          v-if="Object.keys(filteredQuestions).length > 0"
-          v-for="(value, name) in filteredQuestions"
-          class="pt-2"
-          :key="name"
-        >
+        <div v-if="Object.keys(filteredQuestions).length > 0" v-for="(value, name) in filteredQuestions" class="pt-2"
+          :key="name">
           <div v-if="value.length != 0" class="py-4">
             <v-chip>
               {{ name }}

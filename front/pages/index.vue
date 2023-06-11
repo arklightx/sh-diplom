@@ -3,12 +3,10 @@
     <v-row no-gutters>
       <v-col class="col col-1 d-none d-md-block"></v-col>
       <v-col class="col col-12 col-md-10">
-        <v-img
-          class="d-flex text-center main_img align-center justify-center"
-          gradient="to top right, rgba(0,0,0,.1), rgba(25,32,72,.8)"
-          max-height="600px"
-          :src="require('@/assets/images/main.jpg')"
-        >
+        <v-img class="d-flex text-center main_img align-center justify-center"
+          gradient="to top right, rgba(0,0,0,.1), rgba(25,32,72,.8)" max-height="600px"
+          :src="require('@/assets/images/main.jpg')">
+          <div class="body-1">ООО "Управляющая компания"</div>
           <h1 class="text-h4 text-md-h2 mb-2 font-weight-medium">
             На страже вашего дома
           </h1>
@@ -27,12 +25,7 @@
           <v-card-title>Наши дома</v-card-title>
           <v-card-text>
             <div class="d-flex flex-wrap w-100 justify-space-between">
-              <home-item
-                class="w-50"
-                :item="item"
-                :key="key"
-                v-for="(item, key) in computedHomes"
-              ></home-item>
+              <home-item class="w-50" :item="item" :key="key" v-for="(item, key) in computedHomes"></home-item>
             </div>
             <div class="d-flex align-center justify-center">
               <v-btn @click="$router.push('/homes')" color="primary">Смотреть все</v-btn>
@@ -42,12 +35,8 @@
         <v-card class="mt-2">
           <v-card-title>Хотите задать вопрос?</v-card-title>
           <v-card-text>
-            <div
-              v-if="Object.keys(groupedQuestions).length > 0"
-              v-for="(value, name) in groupedQuestions"
-              class="pt-2"
-              :key="name"
-            >
+            <div v-if="Object.keys(groupedQuestions).length > 0" v-for="(value, name) in groupedQuestions" class="pt-2"
+              :key="name">
               <div v-if="value.length != 0" class="py-4">
                 <v-chip>
                   {{ name }}
@@ -88,15 +77,15 @@ export default {
     HomeItem,
     QuestionForm,
   },
-  created(){
+  created() {
     this.$axios.get("/api/v1/homes").then(
-      res=>{
+      res => {
         this.homes = res.data
         console.log(this.homes)
       }
     )
     this.$axios.get("/api/v1/news").then(
-      res=>{
+      res => {
         this.news = res.data
       }
     )
@@ -219,13 +208,14 @@ export default {
 .w-50 {
   width: 49% !important;
   position: relative;
-  
+
 }
+
 .main_img {
   margin-top: -25px;
 }
 
-.w-100{
+.w-100 {
   width: 100%;
 }
 </style>

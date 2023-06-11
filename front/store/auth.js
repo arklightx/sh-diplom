@@ -39,7 +39,6 @@ export const actions = {
                 )
                 .then((res) => {
                     let result = res.data;
-                    
                     commit("setAccessToken", result.access);
                     let user = this.$cookiz.get("user");
                     commit("setUser", user);

@@ -52,7 +52,7 @@
               </div>
               <div class="d-flex align-center mb-2">
                 <v-icon class="mr-2">mdi-link</v-icon>
-                <a :href="home.messanger_link">Ссылка на мессенджер</a>
+                <a :href="home.messanger_link">Ссылка на групповой чат жителей дома</a>
               </div>
             </div>
           </v-card-text>

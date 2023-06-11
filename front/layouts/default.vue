@@ -12,11 +12,13 @@
 
 <script>
 import Header from '@/components/UI/Header.vue'
-import {mapState} from "vuex"
+import Footer from '~/components/UI/Footer.vue'
+import { mapState } from "vuex"
 export default {
 	name: 'DefaultLayout',
 	components: {
 		Header,
+		Footer
 	},
 	data() {
 		return ({
@@ -24,7 +26,7 @@ export default {
 			user: false,
 		})
 	},
-	computed:{
+	computed: {
 		...mapState("auth", ["isLoggedIn", "accessToken"])
 	}
 }

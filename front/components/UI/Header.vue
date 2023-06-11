@@ -16,15 +16,22 @@
       <v-spacer />
       <v-menu open-on-click left offset-y dense>
         <template v-slot:activator="{ on, attrs }">
-          <v-btn v-bind="attrs" v-on="on" class="my-6 mr-lg-2 mr-0" icon rounded>
-            <v-avatar color="primary">
-              <v-img v-if="user.avatar" :src="base + user.avatar" alt="" />
-              <span v-else-if="user.username" class="white--text text-h5">{{
-                user.username.slice(0, 2)
-              }}</span>
-              <span v-else class="white--text text-h5">ЛК</span>
-            </v-avatar>
+
+          <v-btn x-large v-bind="attrs" v-on="on" class="mr-lg-2 mr-0">
+            <div>
+              Личный кабинет
+              <v-avatar size="44" color="primary">
+                <v-img v-if="user.avatar" :src="base + user.avatar" alt="" />
+                <span v-else-if="user.username" class="white--text text-h5">{{
+                  user.username.slice(0, 2)
+                }}</span>
+                <span v-else class="white--text text-h5">ЛК</span>
+              </v-avatar>
+            </div>
+
           </v-btn>
+
+
         </template>
         <v-list>
           <v-list-item-group>
@@ -46,7 +53,7 @@
                 <v-list-item-title color="primary"> Голосования</v-list-item-title>
               </v-list-item>
               <v-list-item exact to="/lk/requests" nuxt class="primary--text">
-                <v-list-item-title color="primary"> Обращения</v-list-item-title>
+                <v-list-item-title color="primary"> Обращения в УК</v-list-item-title>
               </v-list-item>
             </template>
 
