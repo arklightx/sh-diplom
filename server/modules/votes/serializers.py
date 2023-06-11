@@ -31,9 +31,6 @@ class VotesVariantsSerializer(serializers.ModelSerializer):
 class VotesSerializer(serializers.ModelSerializer):
     variants = VotesVariantsSerializer(many=True, read_only=True)
 
-    def create(self, validated_data):
-        raise Exception("asdasdasd")
-
     class Meta:
         model = Votes
         fields = "__all__"

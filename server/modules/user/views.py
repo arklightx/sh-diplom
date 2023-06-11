@@ -6,13 +6,14 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from core.exception import ClientException, ServerException
-from core.security.jwt import generate_jwt_pair, decode_jwt
-from core.utils.esia import get_refresh_dict
+from modules.exception import ClientException
 
-from .auth import AuthenticationSystem
+from .auth import AuthenticationSystem, generate_jwt_pair, decode_jwt
 from .models import User, AccessTokens, RefreshTokens
 from .serializers import AuthorizationSerializer, AuthRespSerializer, UserSerializer
+
+import datetime
+from django.conf import settings
 
 
 class Authorization(CreateAPIView):
@@ -32,7 +33,13 @@ class Authorization(CreateAPIView):
                 "access": pair.access.token,
                 "user": candidate
             }
-            response_cookie = get_refresh_dict(pair.refresh.token)
+            response_cookie = {
+                "key": "refresh",
+                "value": pair.refresh.token,
+                "httponly": True,
+                "expires": settings.JWT_REFRESH_LIFETIME + datetime.datetime.now(),
+                "samesite": "Lax"
+            }
             response = Response(AuthRespSerializer(response_data).data, status=status.HTTP_200_OK)
             response.set_cookie(**response_cookie)
             return response
@@ -46,7 +53,14 @@ class Logout(DestroyAPIView):
     def delete(self, request: Request, *args, **kwargs):
         AccessTokens.objects.get(token=request.auth.token).delete()
         response = Response(status=status.HTTP_204_NO_CONTENT)
-        response.set_cookie(**get_refresh_dict())
+        ck = {
+            "key": "refresh",
+            "value": "",
+            "httponly": True,
+            "expires": settings.JWT_REFRESH_LIFETIME + datetime.datetime.now(),
+            "samesite": "Lax"
+        }
+        response.set_cookie(**ck)
         return response
 
 class NewTokenPair(APIView):
@@ -64,7 +78,14 @@ class NewTokenPair(APIView):
         new_pair = generate_jwt_pair(refresh_model.user)
         AccessTokens.objects.get(token=refresh_model.access.token).delete()
         response = Response({"access": new_pair.access.token}, status=status.HTTP_200_OK)
-        response.set_cookie(**get_refresh_dict(new_pair.refresh.token))
+        ck = {
+            "key": "refresh",
+            "value": new_pair.refresh.token,
+            "httponly": True,
+            "expires": settings.JWT_REFRESH_LIFETIME + datetime.datetime.now(),
+            "samesite": "Lax"
+        }
+        response.set_cookie(**ck)
         return response
 
 
